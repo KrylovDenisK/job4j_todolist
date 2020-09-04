@@ -1,0 +1,24 @@
+language: java
+jdk:
+  - openjdk11
+
+services:
+  - postgresql
+
+before_install:
+  - psql -c 'create database dreamjob;' -U postgres
+sudo: false
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+
+notifications:
+  email:
+    recipients:
+      -d.krylovk@gmail.com
+    on_success: never # default: change
+    on_failure: always # default: always
+    env:
+      global:
+        - CODECOV_TOKEN="a31b2062-fe57-4332-9ff0-fbe2d332f4b4"
