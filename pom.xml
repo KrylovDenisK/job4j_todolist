@@ -12,6 +12,9 @@
   <profiles>
     <profile>
       <id>test</id>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
       <properties>
         <db.url>jdbc:postgresql://localhost:5432/todoList</db.url>
         <db.username>postgres</db.username>
