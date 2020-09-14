@@ -9,6 +9,7 @@ import ru.job4j.todolist.model.Item;
 import ru.job4j.todolist.store.hibernate.HibernateFactory;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 
 public class StoreItem implements Store {
@@ -23,12 +24,11 @@ public class StoreItem implements Store {
         private static final Store INSTATCE = new StoreItem();
     }
 
-    @Override
-    public void create(Item item) {
+    private void tx(final Consumer<Session> command) {
         Transaction tx = null;
         try (Session session = sessionFactory.openSession()) {
             tx = session.beginTransaction();
-            session.save(item);
+            command.accept(session);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -36,6 +36,11 @@ public class StoreItem implements Store {
             }
             LOG.error(e.getMessage(), e);
         }
+
+    }
+    @Override
+    public void create(Item item) {
+        this.tx(session -> session.save(item));
     }
 
     @Override
@@ -57,36 +62,21 @@ public class StoreItem implements Store {
 
     @Override
     public void delete(Integer id) {
-        Transaction tx = null;
-        try (Session session = sessionFactory.openSession()) {
-            tx = session.beginTransaction();
-            Item entity = session.load(Item.class, id);
-            session.delete(entity);
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            LOG.error(e.getMessage(), e);
-        }
+        this.tx(
+                session -> {
+                    Item entity = session.load(Item.class, id);
+                    session.delete(entity);
+        });
+
     }
 
     @Override
     public void update(Integer id) {
-        Transaction tx = null;
-        try (Session session = sessionFactory.openSession()) {
-            tx = session.beginTransaction();
+        this.tx(session -> {
             Item entity = session.load(Item.class, id);
             boolean value = entity.getDone();
             entity.setDone(!value);
             session.update(entity);
-            tx.commit();
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            LOG.error(e.getMessage(), e);
-        }
-
+        });
     }
 }

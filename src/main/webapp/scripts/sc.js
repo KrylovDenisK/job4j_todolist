@@ -61,10 +61,10 @@ function loadItems() {
     let vl;
      for (let i = 0; i < items.length; i++) {
          vl = items[i];
-         if (!$('#done').prop("checked")) {
+         if ($('#done').prop("checked")) {
              rowAdd(vl.id, vl.description, vl.created, vl.done);
          } else {
-             if (vl.done) {
+             if (!vl.done) {
                  rowAdd(vl.id, vl.description, vl.created, vl.done);
              }
 
