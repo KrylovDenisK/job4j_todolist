@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>TODO list</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="scripts/sc.js"></script>
+</head>
+<body onload="getItems()">
+<div class="container">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-12" align="center">
+                <h1>TODO List</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div align="center">
+            <div class="form-inline">
+                <div class="form-group">
+                    <label for="desc">Description</label>
+                    <input type="text" class="form-control" id="desc" name="desc" title="Write your desc" placeholder="Description">
+                </div>
+                <div class="form-group">
+                    <button class="form-control" type="submit" id="send" name="send" onclick="newRow()">Add</button>
+                    <label for="done" >IS DONE</label>
+                    <input type="checkbox" id="done" onclick="getIsDone()">
+                </div>
+            </div>
+
+            </div><br>
+        </div>
+    <table class="table table-bordered" id="table">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Description</th>
+            <th>Created</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+    </div>
+</div>
+</body>
+</html>
