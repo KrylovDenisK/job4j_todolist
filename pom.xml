@@ -28,9 +28,9 @@
       <plugin>
         <groupId>org.liquibase</groupId>
         <artifactId>liquibase-maven-plugin</artifactId>
-        <version>3.6.2</version>
+        <version>3.10.1</version>
         <configuration>
-          <changeLogFile>${basedir}/db/master.xml</changeLogFile>
+          <changeLogFile>${basedir}\src\main\resources\db\changeLog\db.changeLog-master.xml</changeLogFile>
           <url>jdbc:postgresql://localhost:5432/todoList</url>
           <driver>org.postgresql.Driver</driver>
           <username>postgres</username>
@@ -39,9 +39,9 @@
         <executions>
           <execution>
             <phase>process-resources</phase>
-            <goals>
-              <goal>update</goal>
-            </goals>
+              <goals>
+                  <goal>update</goal>
+              </goals>
           </execution>
         </executions>
       </plugin>
@@ -112,6 +112,11 @@
       <version>1.3</version>
       <scope>test</scope>
     </dependency>
+      <dependency>
+          <groupId>org.liquibase</groupId>
+          <artifactId>liquibase-core</artifactId>
+          <version>3.6.2</version>
+      </dependency>
     <dependency>
       <groupId>org.powermock</groupId>
       <artifactId>powermock-module-junit4</artifactId>

@@ -1,6 +1,5 @@
 package ru.job4j.todolist.service;
 
-import org.json.JSONObject;
 import ru.job4j.todolist.model.Item;
 import ru.job4j.todolist.store.Store;
 import ru.job4j.todolist.store.StoreItem;
@@ -15,13 +14,7 @@ public class ServiceItem implements Service {
         return INSTANCE;
     }
 
-    public String getAllJson() {
-        JSONObject items = new JSONObject();
-        items.put("items", getAll());
-        return items.toString();
-    }
-
-    private List<Item> getAll() {
+    public List<Item> getAll() {
         return store.getAll();
     }
 

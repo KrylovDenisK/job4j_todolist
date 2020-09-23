@@ -16,8 +16,13 @@ public class DeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
-        JSONObject reqParam = new JSONObject(req.getReader().lines().collect(Collectors.joining()));
+        JSONObject reqParam = new JSONObject(
+                                req.getReader()
+                                .lines()
+                                .collect(Collectors.joining()));
         service.delete(reqParam.getInt("id"));
-        resp.getWriter().write(service.getAllJson());
+        JSONObject rpItems = new JSONObject();
+        rpItems.put("items", service.getAll());
+        resp.getWriter().write(rpItems.toString());
     }
 }

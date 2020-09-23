@@ -19,8 +19,13 @@ public class AddItemServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
-        JSONObject reqParam = new JSONObject(req.getReader().lines().collect(Collectors.joining()));
+        JSONObject reqParam = new JSONObject(
+                        req.getReader()
+                        .lines()
+                        .collect(Collectors.joining()));
         service.create(new Item(reqParam.getString("desc")));
-        resp.getWriter().write(service.getAllJson());
+        JSONObject rpItems = new JSONObject();
+        rpItems.put("items", service.getAll());
+        resp.getWriter().write(rpItems.toString());
     }
 }

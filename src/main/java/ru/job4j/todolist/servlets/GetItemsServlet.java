@@ -1,5 +1,6 @@
 package ru.job4j.todolist.servlets;
 
+import org.json.JSONObject;
 import ru.job4j.todolist.service.Service;
 import ru.job4j.todolist.service.ServiceItem;
 
@@ -17,6 +18,8 @@ public class GetItemsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write(service.getAllJson());
+        JSONObject rpItems = new JSONObject();
+        rpItems.put("items", service.getAll());
+        resp.getWriter().write(rpItems.toString());
     }
 }
