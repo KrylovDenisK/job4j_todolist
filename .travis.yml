@@ -7,7 +7,6 @@ services:
 
 before_install:
   - psql -c 'create database todoList;' -U postgres
-sudo: false
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
