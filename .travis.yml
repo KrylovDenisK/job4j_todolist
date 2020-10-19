@@ -6,7 +6,7 @@ services:
   - postgresql
 
 before_install:
-  - psql -c 'create database todoList;' -U postgres
+  - psql -c 'create database todolist;' -U postgres
 sudo: false
 
 after_success:

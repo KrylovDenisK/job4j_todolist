@@ -16,7 +16,7 @@
             <activeByDefault>true</activeByDefault>
         </activation>
       <properties>
-        <db.url>jdbc:postgresql://localhost:5432/todoList</db.url>
+        <db.url>jdbc:postgresql://localhost:5432/todolist</db.url>
         <db.username>postgres</db.username>
         <db.password>132197</db.password>
         <db.driver>org.postgresql.Driver</db.driver>
@@ -31,7 +31,7 @@
         <version>3.10.3</version>
         <configuration>
           <changeLogFile>${basedir}\src\main\resources\db\changeLog\db.changeLog-master.xml</changeLogFile>
-          <url>jdbc:postgresql://localhost:5432/todoList</url>
+          <url>jdbc:postgresql://localhost:5432/todolist</url>
           <driver>org.postgresql.Driver</driver>
           <username>postgres</username>
           <password>132197</password>
