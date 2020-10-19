@@ -2,8 +2,14 @@ let items;
 
 function sendAjax(request) {
     $.ajax(request).done(function(data) {
-        items = data.items;
-        loadItems();
+        let url = data.url;
+        if (url === undefined) {
+            document.getElementById('user').innerHTML = getParamURL() + " | Sign out";
+            items = data.items;
+            loadItems();
+        } else {
+            window.location.href = url;
+        }
     }).fail(function(err){
         alert(err);
     });
@@ -62,10 +68,10 @@ function loadItems() {
      for (let i = 0; i < items.length; i++) {
          vl = items[i];
          if ($('#done').prop("checked")) {
-             rowAdd(vl.id, vl.description, vl.created, vl.done);
+             rowAdd(vl.id, vl.description, vl.created, vl.user.name, vl.done);
          } else {
              if (!vl.done) {
-                 rowAdd(vl.id, vl.description, vl.created, vl.done);
+                 rowAdd(vl.id, vl.description, vl.created, vl.user.name, vl.done);
              }
 
          }
@@ -76,13 +82,14 @@ function getIsDone() {
     getItems();
 }
 
-function rowAdd(id, desc, time, status) {
+function rowAdd(id, desc, time, user, status) {
     $('#table > tbody:last-child')
         .append('<tr><td>' + id +'</td>'
             + '<td>' + desc +'</td>'
             + '<td>' + time +'</td>'
-            + '<td>' +'<input type="checkbox" id="' + id +'" onclick="updateStatus('+ id +')">'
-            + '<button class="form-control" type="submit" onclick="deleteItem('+ id +')">Delete</button></td><tr/>');
+            + '<td>' + user +'</td>'
+            + '<td>' +'<input type="checkbox" id="' + id +'" onclick="updateStatus('+ id +')"><br>'
+            + '<button class="btn btn-info" type="submit" onclick="deleteItem('+ id +')">Delete</button></td><tr/>');
     $('#' + id).prop("checked", status);
 
 }
@@ -95,4 +102,8 @@ function validate() {
         result = false;
     }
     return result;
+}
+
+function getParamURL() {
+    return new URLSearchParams(window.location.search).get("value");
 }

@@ -2,8 +2,9 @@ package ru.job4j.todolist.servlets;
 
 import org.json.JSONObject;
 import ru.job4j.todolist.model.Item;
+import ru.job4j.todolist.model.User;
 import ru.job4j.todolist.service.Service;
-import ru.job4j.todolist.service.ServiceItem;
+import ru.job4j.todolist.service.ServiceBaseImp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 
 @WebServlet(name = "AddItemServlet", urlPatterns = "/add")
 public class AddItemServlet extends HttpServlet {
-    private final Service service = ServiceItem.getInstance();
+    private final Service<Item> service = ServiceBaseImp.getInstance(Item.class);
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setCharacterEncoding("UTF-8");
@@ -23,7 +24,10 @@ public class AddItemServlet extends HttpServlet {
                         req.getReader()
                         .lines()
                         .collect(Collectors.joining()));
-        service.create(new Item(reqParam.getString("desc")));
+        service.create(new Item(
+                reqParam.getString("desc"),
+                (User) req.getSession().getAttribute("user"))
+        );
         JSONObject rpItems = new JSONObject();
         rpItems.put("items", service.getAll());
         resp.getWriter().write(rpItems.toString());

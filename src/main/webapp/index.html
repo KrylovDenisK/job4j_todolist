@@ -13,6 +13,11 @@
 <div class="container">
     <div class="form-group">
         <div class="row">
+            <div class="col-md-12" align="right">
+                <h4><a href="/todo/auth" id="user"></a></h4>
+            </div>
+        </div>
+        <div class="row" >
             <div class="col-md-12" align="center">
                 <h1>TODO List</h1>
             </div>
@@ -25,7 +30,7 @@
                     <input type="text" class="form-control" id="desc" name="desc" title="Write your desc" placeholder="Description">
                 </div>
                 <div class="form-group">
-                    <button class="form-control" type="submit" id="send" name="send" onclick="newRow()">Add</button>
+                    <button class="btn btn-success" type="submit" id="send" name="send" onclick="newRow()">Add</button>
                     <label for="done" >IS DONE</label>
                     <input type="checkbox" id="done" onclick="getIsDone()">
                 </div>
@@ -39,6 +44,7 @@
             <th>id</th>
             <th>Description</th>
             <th>Created</th>
+            <th>User</th>
             <th>Status</th>
         </tr>
         </thead>

@@ -11,17 +11,21 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(name = "description")
-    private String description;
+    private String name;
     @Column(name = "created")
     private LocalDateTime created = LocalDateTime.now().withNano(0);
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
     @Column(name = "done")
     private boolean done;
 
     public Item() {
     }
 
-    public Item(String description) {
-        this.description = description;
+    public Item(String description, User user) {
+        this.name = description;
+        this.user = user;
     }
 
     public Integer getId() {
@@ -32,12 +36,28 @@ public class Item {
         this.id = id;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public boolean isDone() {
+        return done;
+    }
+
+    public void setDone(boolean done) {
+        this.done = done;
+    }
+
     public String getDescription() {
-        return description;
+        return name;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.name = description;
     }
 
     public LocalDateTime getCreated() {
@@ -66,7 +86,7 @@ public class Item {
         }
         Item item = (Item) o;
         return Objects.equals(id, item.id)
-                && Objects.equals(description, item.description)
+                && Objects.equals(name, item.name)
                 && Objects.equals(created, item.created)
                 && Objects.equals(done, item.done);
     }
@@ -74,12 +94,12 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" + "id=" + id
-                + ", description='" + description + '\'' + ", created="
+                + ", description='" + name + '\'' + ", created="
                 + created + ", done=" + done + '}';
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, description, created, done);
+        return Objects.hash(id, name, created, done);
     }
 }

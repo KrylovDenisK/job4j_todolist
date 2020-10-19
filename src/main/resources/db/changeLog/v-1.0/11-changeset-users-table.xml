@@ -5,20 +5,20 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="1.1" author="d.krylov" runOnChange="true">
+    <changeSet id="1.3" author="d.krylov" runOnChange="true">
         <sqlFile dbms="postgresql"
                  endDelimiter="\nGO"
                  relativeToChangelogFile="true"
                  splitStatements="true"
                  stripComments="true"
-                 path="01-create-items-table.sql"/>
+                 path="11-create-users-table.sql"/>
         <rollback>
             <sqlFile dbms="postgresql"
                      endDelimiter="\nGO"
                      relativeToChangelogFile="true"
                      splitStatements="true"
                      stripComments="true"
-                     path="01-create-items-table.sql"/>
+                     path="11-drop-users-table.sql"/>
         </rollback>
     </changeSet>
 </databaseChangeLog>

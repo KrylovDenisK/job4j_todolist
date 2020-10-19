@@ -6,7 +6,7 @@
     </File>
 </Appenders>
 <Loggers>
-    <Logger name="ru.job4j.todolist.store.StoreItem" level="trace" additivity="false">
+    <Logger name="ru.job4j.todolist.store.StoreBase" level="trace" additivity="false">
         <AppenderRef ref="LogTodoList"/>
     </Logger>
     <Root level="error">

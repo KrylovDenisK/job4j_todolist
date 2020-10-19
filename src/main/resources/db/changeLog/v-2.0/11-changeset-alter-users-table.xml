@@ -5,7 +5,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                     http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <include file="01-changeset-items-table.xml" relativeToChangelogFile="true"/>
-    <include file="10-changeset-roles-table.xml" relativeToChangelogFile="true"/>
-    <include file="11-changeset-users-table.xml" relativeToChangelogFile="true"/>
+    <changeSet id="2.2" author="d.krylov" runOnChange="true">
+        <sqlFile dbms="postgresql"
+                 endDelimiter="\nGO"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"
+                 path="11-alter-users-table.sql"/>
+    </changeSet>
 </databaseChangeLog>

@@ -1,12 +1,12 @@
 package ru.job4j.todolist.store;
 
-import ru.job4j.todolist.model.Item;
-
 import java.util.List;
 
-public interface Store {
-    void create(Item item);
-    List<Item> getAll();
-    void delete(Integer id);
-    void update(Integer id);
+public interface Store<T> {
+    void create(T item);
+    List<T> getAll();
+    void delete(T entity);
+    void update(T entity);
+    T findById(Integer id);
+    List<T> findByName(String name);
 }
