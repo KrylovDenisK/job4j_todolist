@@ -23,8 +23,11 @@ function getItems() {
         dataType: 'json',
     };
     sendAjax(request);
+    loadCategories();
 }
-
+function test() {
+    alert($('#categories').val());
+}
 function newRow() {
     if (validate()) {
         let request = {
@@ -32,7 +35,7 @@ function newRow() {
             url: 'http://localhost:8080/todo/add',
             contentType: 'application/json;charset=UTF-8',
             dataType: 'json',
-            data: JSON.stringify({"desc" : $("#desc").val()})
+            data: JSON.stringify({"desc" : $("#desc").val(), "categories" : $('#categories').val()})
         };
         sendAjax(request);
     }
@@ -60,6 +63,21 @@ function deleteItem(id) {
         data: JSON.stringify({"id" : id})
     };
     sendAjax(request);
+}
+
+function loadCategories() {
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:8080/todo/category',
+        dataType: 'json'
+    }).done(function(data) {
+        let ctr = data.categories;
+        for (let i = 0; ctr.length; i++) {
+            $('#categories').append('<option value="' + ctr[i].id + '">' + ctr[i].name + '</option>');
+        }
+    }).fail(function(error) {
+        alert(error)
+    })
 }
 
 function loadItems() {

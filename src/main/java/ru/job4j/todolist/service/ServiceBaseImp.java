@@ -45,4 +45,9 @@ public class ServiceBaseImp<T> implements Service<T> {
     public T findByName(String name) {
         return store.findByName(name).get(0);
     }
+
+    @Override
+    public T findById(Integer id) {
+        return store.findById(id);
+    }
 }

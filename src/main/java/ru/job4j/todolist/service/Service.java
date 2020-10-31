@@ -9,4 +9,5 @@ public interface Service<T> {
     void delete(Integer id);
     void update(Integer id, Consumer<T> command);
     T findByName(String name);
+    T findById(Integer id);
 }
