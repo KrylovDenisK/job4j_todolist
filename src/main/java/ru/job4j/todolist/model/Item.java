@@ -1,8 +1,10 @@
 package ru.job4j.todolist.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +17,7 @@ public class Item {
     @Column(name = "description")
     private String name;
     @Column(name = "created")
-    private LocalDateTime created = LocalDateTime.now().withNano(0);
+    private LocalDateTime created = LocalDateTime.now().withNano(0).withSecond(0);
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -35,6 +37,7 @@ public class Item {
     public void addCategory(Category category) {
         categories.add(category);
     }
+
     public Integer getId() {
         return id;
     }

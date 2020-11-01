@@ -101,10 +101,11 @@ function getIsDone() {
 }
 
 function rowAdd(id, desc, time, user, status) {
+    let dateTime = time.split('T');
     $('#table > tbody:last-child')
         .append('<tr><td>' + id +'</td>'
             + '<td>' + desc +'</td>'
-            + '<td>' + time +'</td>'
+            + '<td>' + dateTime[0] + " "+ dateTime[1] +'</td>'
             + '<td>' + user +'</td>'
             + '<td>' +'<input type="checkbox" id="' + id +'" onclick="updateStatus('+ id +')"><br>'
             + '<button class="btn btn-info" type="submit" onclick="deleteItem('+ id +')">Delete</button></td><tr/>');
