@@ -72,7 +72,7 @@ function loadCategories() {
         dataType: 'json'
     }).done(function(data) {
         let ctr = data.categories;
-        for (let i = 0; ctr.length; i++) {
+        for (let i = 0; i < ctr.length; i++) {
             $('#categories').append('<option value="' + ctr[i].id + '">' + ctr[i].name + '</option>');
         }
     }).fail(function(error) {
@@ -83,17 +83,17 @@ function loadCategories() {
 function loadItems() {
     $('#table > tbody').empty();
     let vl;
-     for (let i = 0; i < items.length; i++) {
-         vl = items[i];
-         if ($('#done').prop("checked")) {
-             rowAdd(vl.id, vl.description, vl.created, vl.user.name, vl.done);
-         } else {
-             if (!vl.done) {
-                 rowAdd(vl.id, vl.description, vl.created, vl.user.name, vl.done);
-             }
+    for (let i = 0; i < items.length; i++) {
+        vl = items[i];
+        if ($('#done').prop("checked")) {
+            rowAdd(vl.id, vl.description, vl.created, vl.user.name, vl.done);
+        } else {
+            if (!vl.done) {
+                rowAdd(vl.id, vl.description, vl.created, vl.user.name, vl.done);
+            }
 
-         }
-     }
+        }
+    }
 }
 
 function getIsDone() {

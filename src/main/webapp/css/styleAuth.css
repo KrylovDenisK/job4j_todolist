@@ -1,0 +1,10 @@
+.header {
+    background-image: url("../images/back.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    height: 900px;
+}
+.card {
+    background: rgba(244, 244, 244, 0.79);
+}
